@@ -147,7 +147,7 @@ class GW2RPC:
         map_name = map_info["name"]
         region = map_info.get("region_name", "thanks_anet")
         if self.registry:
-            if map_name == "Fractals of the Mists":
+            if map_name == "Fractales des Brumes":
                 for fractal in self.registry["fractals"]:
                     if fractal["id"] == map_id:
                         state = fractal["name"] + " fractal"
@@ -155,8 +155,8 @@ class GW2RPC:
                         break
                 else:
                     image = "fotm"
-                    state = "Fractals of the Mists"
-                name = "Fractals of the Mists"
+                    state = "Fractales des Brumes"
+                name = "Fractales des Brumes"
             else:
                 if map_name in self.registry["special"]:
                     image = self.registry["special"][map_name]
@@ -171,9 +171,9 @@ class GW2RPC:
         else:
             special = {
                 "Fractals of the Mists": "fotm",
-                "Windswept Haven": "gh_haven",
-                "Gilded Hollow": "gh_hollow",
-                "Lost Precipice": "gh_precipice"
+                "Refuge de Chassevent": "gh_haven",
+                "Caverne dorée": "gh_hollow",
+                "Précipice perdu": "gh_precipice"
             }.get(map_info["name"])
             if special:
                 return special
@@ -187,7 +187,7 @@ class GW2RPC:
                     image = "default"
             name = map_name
             state = name
-        return "in " + state, {"large_image": str(image), "large_text": name}
+        return "dans " + state, {"large_image": str(image), "large_text": name}
 
     def get_raid_assets(self, map_info):
         def readable_id(_id):
@@ -202,9 +202,9 @@ class GW2RPC:
             self.boss_timestamp = None
             return self.get_map_asset(map_info)
         if boss["type"] == "boss":
-            state = "fighting "
+            state = "en combat "
         else:
-            state = "completing "
+            state = "combat terminé "
 
         name = readable_id(boss["id"])
         state += name
@@ -245,7 +245,7 @@ class GW2RPC:
                 self.last_map_info = map_info
             character = Character(data)
         except APIError:
-            log.exception("API Error!")
+            log.exception("API Erreur!")
             self.last_map_info = None
             return None
         state, map_asset = self.get_map_asset(map_info)
@@ -272,7 +272,7 @@ class GW2RPC:
             if self.last_continent_info:
                 point = get_closest_poi(map_info, continent_info)
                 if point:
-                    map_asset["large_text"] += " near " + point["name"]
+                    map_asset["large_text"] += " proche de " + point["name"]
         map_asset["large_text"] += get_region()
         activiy = {
             "state": state,
@@ -289,12 +289,12 @@ class GW2RPC:
 
     def in_character_selection(self):
         activity = {
-            "state": "in character selection",
+            "state": "sélection de personnage",
             "assets": {
                 "large_image":
                 "default",
                 "large_text":
-                "Character Selection",
+                "Sélection de personnage",
                 "small_image":
                 "gw2rpclogo",
                 "small_text":
@@ -375,7 +375,7 @@ class GW2RPC:
                         self.game.create_map()
                     if not self.rpc.running:
                         start_rpc()
-                        log.debug("starting self.rpc")
+                        log.debug("Lancement self.rpc")
                     try:
                         data = self.get_activity()
                     except requests.exceptions.ConnectionError:
@@ -395,9 +395,9 @@ class GW2RPC:
                         log.debug("Killing RPC")
                 time.sleep(15)
         except Exception as e:
-            log.critical("GW2RPC has crashed", exc_info=e)
+            log.critical("GW2RPC a crashé", exc_info=e)
             create_msgbox(
-                "GW2 Rich Presence has crashed.\nPlease check your "
-                "log file and report this to the author!",
+                "GW2 Rich Presence a crashé.\nVérifiez le fichier "
+                "log et envoyez son contenu au créateur!",
                 code=16)
             self.shutdown()

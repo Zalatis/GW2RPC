@@ -32,7 +32,7 @@ class GW2Api:
         def get_account_and_world():
             try:
                 res = self._call_api("account")
-                ep = "worlds/{}".format(res["world"])
+                ep = "worlds/{}?lang=fr".format(res["world"])
                 return res["name"], self._call_api(ep)["name"]
             except (APIError, KeyError):
                 return None, None
@@ -55,20 +55,20 @@ class GW2Api:
             self.account, self.world = None, None
 
     def get_map_info(self, map_id):
-        return self._call_api("maps/" + str(map_id))
+        return self._call_api("maps/" + str(map_id) + "?lang=fr")
 
     def get_continent_info(self, map_info):
         ep = ("continents/{continent_id}/floors/{default_floor}/regi"
-              "ons/{region_id}/maps/{id}".format(**map_info))
+              "ons/{region_id}/maps/{id}?lang=fr".format(**map_info))
         return self._call_api(ep)
 
     def get_character(self, name):
         if not self._authenticated:
             return None
-        return self._call_api("characters/" + name)
+        return self._call_api("characters/" + name + "?lang=fr")
 
     def get_guild(self, gid):
-        return self._call_api("guild/" + gid)
+        return self._call_api("guild/" + gid + "?lang=fr")
 
     def _call_api(self, endpoint, *, key=None):
         url = self._base_url + endpoint

@@ -16,11 +16,11 @@ def check_gw():
     if os.path.isfile(gw2_64_path):
         if b"Gw2-64.exe" not in tasklist:
             subprocess.Popen([gw2_64_path])
-            print("Started 64")
+            print("64Bits Version")
     elif os.path.isfile(gw2_path):
         if b"Gw2.exe" not in tasklist:
             subprocess.Popen([gw2_path])
-            print("Started 32")
+            print("32bits version")
     else:
         Mbox('Erreur', 'GW2 non trouvé. Veuillez déplacer les fichiers RPC dans '
              'addons\RPC\ situé dans le dossier d\'installation de GW2.', 0)

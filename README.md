@@ -1,4 +1,4 @@
-A Discord Rich Presence addon for Guild Wars 2.
+A Discord Rich Presence addon for Guild Wars 2. (FRENCH TRANSLATION)
 
 https://gw2rpc.info
 

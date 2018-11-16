@@ -21,10 +21,10 @@ class GW2Api:
                 for p in required_permissions:
                     if p not in res["permissions"]:
                         log.warning(
-                            "API key missing required permission: {}".format(
+                            "La Clé API n\'a pas la permission requise: {}".format(
                                 p))
                         return False
-                log.info("API key verified")
+                log.info("Clé API vérifiée")
                 return True
             except APIError:
                 return False

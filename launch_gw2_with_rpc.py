@@ -22,18 +22,18 @@ def check_gw():
             subprocess.Popen([gw2_path])
             print("Started 32")
     else:
-        Mbox('Error', 'Gw2 not found. Please move the RPC files into '
-             'addons\RPC\ in your GW2 installation folder.', 0)
+        Mbox('Erreur', 'GW2 non trouvé. Veuillez déplacer les fichiers RPC dans '
+             'addons\RPC\ situé dans le dossier d\'installation de GW2.', 0)
 
 
 def check_rpc():
     if os.path.isfile(rpc_path):
         if b"gw2rpc.exe" not in tasklist:
             subprocess.Popen([rpc_path])
-            print("Started rpc")
+            print("RPC Lancé")
     else:
-        Mbox('Error', 'gw2rpc.exe not found. Please move the RPC files into '
-             'addons\RPC\ in your GW2 installation folder.', 0)
+        Mbox('Erreur', 'gw2rpc.exe non trouvé. Veuillez déplacer les fichiers RPC dans '
+             'addons\RPC\ situé dans le dossier d\'installation de GW2.', 0)
 
 
 if __name__ == "__main__":
